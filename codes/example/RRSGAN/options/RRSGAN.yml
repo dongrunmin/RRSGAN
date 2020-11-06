@@ -1,0 +1,94 @@
+# Not exactly the same as SRResNet in <Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network>
+# With 16 Residual blocks w/o BN
+
+#### general settings
+name: 001_RRSGAN
+use_tb_logger: false
+model: RRSGAN_model
+scale: 4
+Ref_color: RGB # choose gray, y, RGB
+gpu_ids: [0,1,2,3,4,5,6,7]
+
+#### datasets
+datasets:
+  train:
+    name: RRSSRD
+    data_type: lmdb
+    mode: RRSNet
+    dataroot_GT: ../../../dataset/train/train_lmdb/HR.lmdb
+    dataroot_LQ: ../../../dataset/train/train_lmdb/LR.lmdb
+    dataroot_LQ_UX4: ../../../dataset/train/train_lmdb/LR_UX4.lmdb
+    dataroot_Ref: ../../../dataset/train/train_lmdb/Ref.lmdb
+    dataroot_Ref_DUX4: ../../../dataset/train/train_lmdb/Ref_DUX4.lmdb
+
+    use_shuffle: true
+    n_workers: 2  # per GPU
+    batch_size: 8
+    GT_size: 256
+    use_flip: true
+    use_rot: true
+  val:
+    name: RRSSRD_val_1st
+    mode: RRSNet
+    dataroot_GT: ../../../dataset/val/val_1st_lmdb/HR.lmdb
+    dataroot_LQ: ../../../dataset/val/val_1st_lmdb/LR.lmdb
+    dataroot_LQ_UX4: ../../../dataset/val/val_1st_lmdb/LR_UX4.lmdb
+    dataroot_Ref: ../../../dataset/val/val_1st_lmdb/google_Ref.lmdb
+    dataroot_Ref_DUX4: ../../../dataset/val/val_1st_lmdb/google_Ref_DUX4.lmdb
+
+#### network structures
+network_G:
+  which_model_G: RRSNet_arch
+  nf: 64
+  n_blocks: 16
+network_D:
+  which_model_D: discriminator_vgg_128
+  in_nc: 3
+  nf: 64
+
+#### path
+path:
+  strict_load: false
+  resume_state: ~
+  root: ./exp
+
+train:
+  lr_G: !!float 1e-4
+  weight_decay_G: 0
+  weight_decay_G_grad: 0
+  beta1_G: 0.9
+  beta2_G: 0.99
+  beta1_G_grad: 0.9
+  lr_D: !!float 1e-4
+  weight_decay_D: 0
+  beta1_D: 0.9
+  beta2_D: 0.99
+  lr_scheme: MultiStepLR
+
+  niter: 250000
+  warmup_iter: -1  # no warm up
+  lr_steps: [50000, 100000, 150000, 200000]
+  lr_gamma: 0.5
+
+  pixel_criterion: l1
+  pixel_weight: 1.0
+  feature_criterion: l1
+  feature_weight: !!float 1e-1
+  gan_type: gan  # gan | ragan
+  gan_weight: !!float 1e-3
+  gradient_pixel_weight: 1.0
+  gradient_gan_weight: !!float 1e-3
+  l1_init: 30000
+
+
+  D_update_ratio: 1
+  D_init_iters: 0
+
+  manual_seed: 10
+  val_freq: !!float 5e3
+
+
+#### logger
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 5e3
