@@ -39,14 +39,14 @@ The training set is transformed into **LMDB** format for faster IO speed.
 
 ## Training
 
-### To train an RRSNet model:
+### To train an RRSGAN model:
 
 Before training, pre-trained vgg model need to be downloaded [here](https://download.pytorch.org/models/vgg19-dcbb9e9d.pth). Please put it in the folder `./codes/models/archs/pretrained_model`.
 
 `cd ./codes/example/RRSGAN`
 
 
-`python train.py -opt options/RRSGAN.yml`
+`sh train.sh`
 
 ### Train with Slurm 
 
