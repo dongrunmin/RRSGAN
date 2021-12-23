@@ -75,7 +75,7 @@ The code is based on [MMSR](https://github.com/open-mmlab/mmediting)
 
 
 ## Contact 
-If you have any questions about our work, please contact <drm17@mails.tsinghua.edu.cn>
+If you have any questions about our work, please contact <drm20@mails.tsinghua.edu.cn>
 
 
 
