@@ -18,7 +18,7 @@ PyTorch implementation of RRSGAN: Reference-based Super-Resolution for Remote Se
 
 ### Download Datasets
 
-Training dataset can be downloaded from [baidu cloud](https://pan.baidu.com/s/1M5HAlb9DqO5IOWQexETFaw), password:lnff,
+Training dataset can be downloaded from [baidu pan](https://pan.baidu.com/s/1M5HAlb9DqO5IOWQexETFaw), password:lnff,
 [google drive](https://drive.google.com/file/d/19VOEQLcJa_bS28eSIwqOJDD72LEfGxoD/view?usp=sharing), and [Microsoft OneDrive](https://share.multcloud.link/share/3fcfd2e5-00c3-47f1-9b07-dc2910ddfef8).
 
 Test datasets can be found in `./dataset/val`.
