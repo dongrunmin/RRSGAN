@@ -71,11 +71,11 @@ Before training, pre-trained vgg model need to be downloaded [here](https://down
 
 
 ## Acknowledgement
-The code is based on [MMSR](https://github.com/open-mmlab/mmediting)
+The code is based on [MMSR](https://github.com/open-mmlab/mmediting).
 
 
 ## Contact 
-If you have any questions about our work, please contact <drm20@mails.tsinghua.edu.cn>
+If you have any questions about our work, please contact <drm@mail.tsinghua.edu.cn>
 
 
 
